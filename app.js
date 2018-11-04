@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Create socket
 io.on('connection', function(socket) {
-  socket.on('drawing', function(data) {
+  socket.on('textEdit', function(data) {
     socket.broadcast.emit('drawing', data);
     console.log('Event broadcasted', data);
   });
