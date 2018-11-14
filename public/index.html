@@ -20,46 +20,6 @@
 		<link rel="icon" type="image/png" href="http://icons.iconarchive.com/icons/hopstarter/sleek-xp-software/256/Notepad-icon.png">
 		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
-
-		<script type="text/javascript">
-			var socket = io();
-
-			$(document).ready(function() {
-
-				socket.on('textEdit', function(data){
-					setTitle(data)
-					setLineNumber(data)
-				});
-				
-				$('#text').bind('keyup', function() {
-					var content = $(this).val();
-					setTitle(content);
-					setLineNumber(content);
-				});
-				$('#text').bind('focus click', function() {
-					var content = $(this).val();
-					setLineNumber(content);
-				});
-			});
-			function setTitle(content) {
-
-				socket.emit('textEdit', content);
-				var lines = content.split('\n');
-				for (i = 0; i < lines.length; i++) {
-					if (lines[i].trim().length > 0) {
-						document.title = lines[i];
-						return 0;
-					}
-				}
-				document.title = "Notepad";
-			}
-			function setLineNumber(content) {
-				var lineNumber = content.substr(0, $('#text').prop('selectionStart')).split("\n").length;
-				$('#lineNumber').html(lineNumber);
-			}
-			
-
-		</script>
 		<style type="text/css">
 			#text {
 				position: absolute;
@@ -105,6 +65,8 @@
 				margin-top: 3px;
 			}
 		</style>
+		 <script src="/main.js"></script>
+
 	</head>
 	<body style="margin: 0;">
 		<textarea id="text" autofocus spellcheck="false"></textarea>
