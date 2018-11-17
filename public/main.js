@@ -2,6 +2,11 @@
 
 $(document).ready(function() {
 var socket = io();
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("text"), {
+	value: "def foo():\n\tprint Hello World",
+	mode:  "python",
+	theme: "monokai"
+});
 
 	socket.on('textEdit', function(data){
 		setTitle(data);
